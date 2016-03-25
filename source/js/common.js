@@ -1,8 +1,12 @@
-'use strict';
+/*
 
-var XXX = XXX || {};
+	API URL: http://www.omdbapi.com/
 
-$(function () {
-	/* Init components */
-	XXX.components.component1.init();
-});
+*/
+
+angular.module('moviesApp', [])
+    .controller('mainCtrl', function() {
+        if(DEBUG) { console.log('[Main Ctrl] Init...'); }
+
+		
+    });

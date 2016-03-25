@@ -1,7 +1,7 @@
 {
-  "name": "XXX",
+  "name": "movieApp",
   "version": "1.0.0",
-  "description": "XXXXXXX",
+  "description": "Movie App",
   "devDependencies": {
     "connect-livereload": "~0.2.0",
     "grunt": "~0.4.5",

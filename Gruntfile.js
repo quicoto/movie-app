@@ -88,7 +88,7 @@ module.exports = function(grunt) {
             },
 			css_main: {
 				src: ['source/css/main.css'],
-				dest: 'dist/css/XXX-main.css'
+				dest: 'dist/css/moviesapp-main.css'
 			},
 
 			css_bootstrap: {
@@ -96,54 +96,55 @@ module.exports = function(grunt) {
 					'source/css/vendor/font-awesome*.css',
 					'source/css/vendor/bootstrap*/*.css'
 				],
-				dest: 'dist/css/XXX-vendor.css'
+				dest: 'dist/css/moviesapp-vendor.css'
 			},
 
 			css_ie8: {
 				src: [
 					'source/css/ie8.css'
 				],
-				dest: 'dist/css/XXX-ie8.min.css'
+				dest: 'dist/css/moviesapp-ie8.min.css'
 			},
 
 			css_pack: {
 			    src: [
-			        'dist/css/XXX-vendor.css',
-					'dist/css/XXX-main.css',
+			        'dist/css/moviesapp-vendor.css',
+					'dist/css/moviesapp-main.css',
 			    ],
-			    dest: 'dist/css/XXX-pack.min.css'
+			    dest: 'dist/css/moviesapp-pack.min.css'
 			},
 
 			js_main: {
 				src : ['source/js/components/*.js', 'source/js/common.js'],
-				dest : 'dist/js/XXX-app.js'
+				dest : 'dist/js/moviesapp-app.js'
 			},
 
 			js_vendor: {
 				src : [
 					'source/js/vendor/jquery*.js',
 					'source/js/vendor/bootstrap*/*.js',
+                    'source/js/vendor/angular.js',
 					'source/js/vendor/other*/*.js'
 				],
-				dest : 'dist/js/XXX-vendor.js',
+				dest : 'dist/js/moviesapp-vendor.js',
 				separator: ';'
 			},
 
 			js_debug_true: {
-				src : ['source/js/__debug_true.js', 'dist/js/XXX-vendor.js', 'dist/js/XXX-app.js'],
-				dest : 'dist/js/XXX-pack.min.js'
+				src : ['source/js/__debug_true.js', 'dist/js/moviesapp-vendor.js', 'dist/js/moviesapp-app.js'],
+				dest : 'dist/js/moviesapp-pack.min.js'
 			},
 
 			js_debug_false: {
-				src : ['source/js/__debug_false.js', 'dist/js/XXX-vendor.js', 'dist/js/XXX-app.js'],
-				dest : 'dist/js/XXX-pack.min.js'
+				src : ['source/js/__debug_false.js', 'dist/js/moviesapp-vendor.js', 'dist/js/moviesapp-app.js'],
+				dest : 'dist/js/moviesapp-pack.min.js'
 			},
 
 			js_ie8: {
 				src : [
 					'source/js/ie89.js'
 					],
-				dest : 'dist/js/XXX-ie89.min.js'
+				dest : 'dist/js/moviesapp-ie89.min.js'
 			},
 		},
 
@@ -154,7 +155,7 @@ module.exports = function(grunt) {
 
 			ie8: {
 				files: {
-					'dist/css/XXX-ie8.min.css': ['dist/css/XXX-ie8.min.css'],
+					'dist/css/moviesapp-ie8.min.css': ['dist/css/moviesapp-ie8.min.css'],
 				}
 			}
 		},
@@ -169,23 +170,23 @@ module.exports = function(grunt) {
 
 		cssmin: {
 			vendor: {
-				src: 'dist/css/XXX-vendor.css',
-				dest: 'dist/css/XXX-vendor.min.css'
+				src: 'dist/css/moviesapp-vendor.css',
+				dest: 'dist/css/moviesapp-vendor.min.css'
 			},
 
 			main: {
-				src: 'dist/css/XXX-main.css',
-				dest: 'dist/css/XXX-main.min.css'
+				src: 'dist/css/moviesapp-main.css',
+				dest: 'dist/css/moviesapp-main.min.css'
 			},
 
 			ie8: {
-				src: 'dist/css/XXX-ie8.min.css',
-				dest: 'dist/css/XXX-ie8.min.css'
+				src: 'dist/css/moviesapp-ie8.min.css',
+				dest: 'dist/css/moviesapp-ie8.min.css'
 			},
 
 			pack: {
-				src: 'dist/css/XXX-pack.min.css',
-				dest: 'dist/css/XXX-pack.min.css'
+				src: 'dist/css/moviesapp-pack.min.css',
+				dest: 'dist/css/moviesapp-pack.min.css'
 			}
 		},
 
@@ -202,8 +203,8 @@ module.exports = function(grunt) {
 
 			js: {
 				files: {
-					'dist/js/XXX-pack.min.js': ['dist/js/XXX-pack.min.js'],
-					'dist/js/XXX-ie89.min.js': ['dist/js/XXX-ie89.min.js']
+					'dist/js/moviesapp-pack.min.js': ['dist/js/moviesapp-pack.min.js'],
+					'dist/js/moviesapp-ie89.min.js': ['dist/js/moviesapp-ie89.min.js']
 				}
 			}
 		},
@@ -223,14 +224,6 @@ module.exports = function(grunt) {
 			}
 		},
 
-		jshint: {
-			options: {
-				jshintrc: '.jshintrc',
-			},
-
-			all: ['source/js/*.js', 'source/js/components/*.js']
-		},
-
 		clean: {
 			all: {
 				src: ['html/*', 'dist/**', 'source/css/**']
@@ -245,11 +238,11 @@ module.exports = function(grunt) {
             },
 
             productionCSS: {
-                src: ['dist/css/*.css', '!dist/css/*.min.css', 'dist/css/XXX-vendor.min.css', 'dist/css/XXX-main.min.css']
+                src: ['dist/css/*.css', '!dist/css/*.min.css', 'dist/css/moviesapp-vendor.min.css', 'dist/css/moviesapp-main.min.css']
             },
 
             productionJS: {
-                src: ['dist/js/*.js', '!dist/js/*.min.js', 'dist/js/XXX-main.min.js', 'dist/js/XXX-vendor.min.js', 'dist/js/XXX-app.min.js']
+                src: ['dist/js/*.js', '!dist/js/*.min.js', 'dist/js/moviesapp-main.min.js', 'dist/js/moviesapp-vendor.min.js', 'dist/js/moviesapp-app.min.js']
             },
 
             sourceMaps: {
@@ -314,8 +307,8 @@ module.exports = function(grunt) {
 	grunt.registerTask('css_compile_prod', ['compass:prod', 'concat:css_bootstrap', 'concat:css_main', 'cmq', 'concat:css_ie8','concat:css_pack', 'stripmq:ie8']);
     grunt.registerTask('css_compile_dev', ['scsslint', 'compass:dev', 'concat:css_bootstrap', 'concat:css_main', 'cmq', 'concat:css_ie8','concat:css_pack', 'stripmq:ie8']);
 
-	grunt.registerTask('js_compile_prod', ['jshint', 'concat:js_main', 'concat:js_vendor', 'concat:js_debug_false', 'concat:js_ie8']);
-	grunt.registerTask('js_compile_dev', ['jshint', 'concat:js_main', 'concat:js_vendor', 'concat:js_debug_true', 'concat:js_ie8']);
+	grunt.registerTask('js_compile_prod', ['concat:js_main', 'concat:js_vendor', 'concat:js_debug_false', 'concat:js_ie8']);
+	grunt.registerTask('js_compile_dev', ['concat:js_main', 'concat:js_vendor', 'concat:js_debug_true', 'concat:js_ie8']);
 
 	grunt.registerTask('compile_html', ['jinja']);
 

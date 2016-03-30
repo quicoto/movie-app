@@ -5,7 +5,7 @@
 function mainController ($http, $scope) {
 	if(DEBUG) { console.log('[Main Ctrl] Init...'); }
 
-	var api = 'http://www.omdbapi.com/?s=star+wars';
+	var api = 'http://www.omdbapi.com/?s=star+wars&type=movie&page=1&r=json';
 
 	// Simple GET request example:
 	$http({

@@ -31,7 +31,7 @@ module.exports = function(grunt) {
 			},
 			js: {
 				files: 'source/js/**/*.js',
-				tasks: ['js_compile']
+				tasks: ['js_compile_dev']
 			},
 			grunt_conf: {
 				files: 'Gruntfile.js',

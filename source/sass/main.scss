@@ -1,3 +1,11 @@
 @import 'base';
 @import 'components/all_components__';
 @import 'vendor/bootstrap-3.3.6/bootstrap-variables';
+
+.bg-primary {
+	a,
+	a:hover,
+	a:focus {
+		color: $white;
+	}
+}

@@ -2,21 +2,30 @@
 	API URL: http://www.omdbapi.com/
 */
 
-function mainController ($http, $scope) {
-	if(DEBUG) { console.log('[Main Ctrl] Init...'); }
+function mainController($http, $scope) {
+    if (DEBUG) {
+        console.log('[Main Ctrl] Init...');
+    }
 
-	var api = 'http://www.omdbapi.com/?s=star+wars&type=movie&page=1&r=json';
+    var api = 'http://www.omdbapi.com/?type=movie&page=1&r=json';
 
-	// Simple GET request example:
-	$http({
-	  method: 'GET',
-	  url: api
-	}).then(function successCallback(response) {
-		console.log(response.data);
-		$scope.movies = response.data.Search;
-	  }, function errorCallback(response) {
-		if(DEBUG) { console.log('[Main Ctrl] Error fetching...'); console.log(response); }
-	  });
+	$scope.getMovies = function() {
+
+		console.log('submit done!');
+
+	    $http({
+	        method: 'GET',
+	        url: api + '&s=' + $scope.searchTerm
+	    }).then(function successCallback(response) {
+	        console.log(response.data);
+	        $scope.movies = response.data.Search;
+	    }, function errorCallback(response) {
+	        if (DEBUG) {
+	            console.log('[Main Ctrl] Error fetching...');
+	            console.log(response);
+	        }
+	    });
+	}
 }
 
 angular.module('moviesApp', [])

@@ -1,0 +1,26 @@
+{% set pageTitle = "Home" -%} {% include "includes/_head.html" %} {%raw%}
+
+<section class="container search-results">
+	<div ng-repeat="movie in movies track by $index" class="movie">
+		<div class="row">
+			<div class="col-xs-6 col-md-3">
+				<img class="img-responsive" ng-src="{{ movie.Poster }}" alt="{{ movie.Title }}">
+			</div>
+			<!-- /.col-xs-12 -->
+			<div class="col-xs-6 col-md-3">
+				<h4>{{ movie.Title }}</h4>
+				<p>
+					<strong>Year</strong> {{ movie.Year }}
+				</p>
+				<p>
+					<a href="http://www.imdb.com/title/{{ movie.imdbID }}/" target="_blank">IMDB</a>
+				</p>
+			</div>
+			<!-- /.col-xs-12 -->
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- ng-repeat -->
+</section>
+
+{%endraw%} {% include "includes/_bottom.html" %}

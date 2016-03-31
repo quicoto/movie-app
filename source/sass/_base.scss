@@ -2,3 +2,8 @@
 @import 'vendor/bootstrap-3.3.6/bootstrap-variables';
 @import 'colors';
 @import 'tools';
+
+body {
+	height: 100%;
+	padding-bottom: rem(7.1); // height of the footer
+}

@@ -23,7 +23,7 @@ module.exports = function(grunt) {
 		watch: {
 			html: {
 				files: ['source/html/*.html', 'source/html/*/*.html'],
-				tasks: ['clean:html', 'compile_html']
+				tasks: ['compile_html']
 			},
 			css: {
 				files: ['source/sass/**/*.{scss,sass}', 'source/img/sprite/*', ],
@@ -42,7 +42,7 @@ module.exports = function(grunt) {
                   livereload: LIVERELOAD_PORT
                 },
                 files: [
-                  'html/{,*/}*.html',
+                  '*.html',
                   'dist/css/*.css',
                   'dist/js/{,*/}*.js',
                   'dist/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
@@ -66,7 +66,7 @@ module.exports = function(grunt) {
 
         open: {
           server: {
-            path: 'http://localhost:<%= connect.options.port %>/html'
+            path: 'http://localhost:<%= connect.options.port %>'
           }
         },
 
@@ -97,13 +97,6 @@ module.exports = function(grunt) {
 					'source/css/vendor/bootstrap*/*.css'
 				],
 				dest: 'dist/css/moviesapp-vendor.css'
-			},
-
-			css_ie8: {
-				src: [
-					'source/css/ie8.css'
-				],
-				dest: 'dist/css/moviesapp-ie8.min.css'
 			},
 
 			css_pack: {
@@ -139,25 +132,6 @@ module.exports = function(grunt) {
 				src : ['source/js/__debug_false.js', 'dist/js/moviesapp-vendor.js', 'dist/js/moviesapp-app.js'],
 				dest : 'dist/js/moviesapp-pack.min.js'
 			},
-
-			js_ie8: {
-				src : [
-					'source/js/ie89.js'
-					],
-				dest : 'dist/js/moviesapp-ie89.min.js'
-			},
-		},
-
-		stripmq: {
-			options: {
-				width: 1025
-			},
-
-			ie8: {
-				files: {
-					'dist/css/moviesapp-ie8.min.css': ['dist/css/moviesapp-ie8.min.css'],
-				}
-			}
 		},
 
 		cmq: {
@@ -179,11 +153,6 @@ module.exports = function(grunt) {
 				dest: 'dist/css/moviesapp-main.min.css'
 			},
 
-			ie8: {
-				src: 'dist/css/moviesapp-ie8.min.css',
-				dest: 'dist/css/moviesapp-ie8.min.css'
-			},
-
 			pack: {
 				src: 'dist/css/moviesapp-pack.min.css',
 				dest: 'dist/css/moviesapp-pack.min.css'
@@ -203,8 +172,7 @@ module.exports = function(grunt) {
 
 			js: {
 				files: {
-					'dist/js/moviesapp-pack.min.js': ['dist/js/moviesapp-pack.min.js'],
-					'dist/js/moviesapp-ie89.min.js': ['dist/js/moviesapp-ie89.min.js']
+					'dist/js/moviesapp-pack.min.js': ['dist/js/moviesapp-pack.min.js']
 				}
 			}
 		},
@@ -227,10 +195,6 @@ module.exports = function(grunt) {
 		clean: {
 			all: {
 				src: ['html/*', 'dist/**', 'source/css/**']
-			},
-
-			html: {
-				src: ['html/*']
 			},
 
             temporalCSS: {
@@ -280,7 +244,7 @@ module.exports = function(grunt) {
 				},
 				files: [{
 				expand: true,
-					dest: 'html/',
+					dest: '',
 					cwd: 'source/html',
 					src: ['**/!(_)*.html']
 				}]
@@ -302,13 +266,13 @@ module.exports = function(grunt) {
 		}
 	});
 
-	grunt.registerTask('cssmin_regular', ['cssmin:main', 'cssmin:vendor', 'cssmin:ie8', 'cssmin:pack']);
+	grunt.registerTask('cssmin_regular', ['cssmin:main', 'cssmin:vendor', 'cssmin:pack']);
 
-	grunt.registerTask('css_compile_prod', ['compass:prod', 'concat:css_bootstrap', 'concat:css_main', 'cmq', 'concat:css_ie8','concat:css_pack', 'stripmq:ie8']);
-    grunt.registerTask('css_compile_dev', ['scsslint', 'compass:dev', 'concat:css_bootstrap', 'concat:css_main', 'cmq', 'concat:css_ie8','concat:css_pack', 'stripmq:ie8']);
+	grunt.registerTask('css_compile_prod', ['compass:prod', 'concat:css_bootstrap', 'concat:css_main', 'cmq','concat:css_pack']);
+    grunt.registerTask('css_compile_dev', ['scsslint', 'compass:dev', 'concat:css_bootstrap', 'concat:css_main', 'cmq','concat:css_pack']);
 
-	grunt.registerTask('js_compile_prod', ['concat:js_main', 'concat:js_vendor', 'concat:js_debug_false', 'concat:js_ie8']);
-	grunt.registerTask('js_compile_dev', ['concat:js_main', 'concat:js_vendor', 'concat:js_debug_true', 'concat:js_ie8']);
+	grunt.registerTask('js_compile_prod', ['concat:js_main', 'concat:js_vendor', 'concat:js_debug_false']);
+	grunt.registerTask('js_compile_dev', ['concat:js_main', 'concat:js_vendor', 'concat:js_debug_true']);
 
 	grunt.registerTask('compile_html', ['jinja']);
 

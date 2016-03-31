@@ -5,7 +5,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<!--  Mobile viewport scale | Disable user zooming as the layout is optimised -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<title>{{ pageTitle }} - MoviesApp</title>
+		<title>Home - MoviesApp</title>
 
 		<!-- Browser color Android -->
 		<meta name="theme-color" content="#000">
@@ -66,3 +66,48 @@
 			</div>
 			<!-- /.row -->
 		</section>
+ 
+
+<section class="container search-results">
+	<div ng-repeat="movie in movies track by $index" class="movie">
+		<div class="row">
+			<div class="col-xs-6 col-md-3">
+				<img class="img-responsive" ng-src="{{ movie.Poster }}" alt="{{ movie.Title }}">
+			</div>
+			<!-- /.col-xs-12 -->
+			<div class="col-xs-6 col-md-3">
+				<h4>{{ movie.Title }}</h4>
+				<p>
+					<strong>Year</strong> {{ movie.Year }}
+				</p>
+				<p>
+					<a href="http://www.imdb.com/title/{{ movie.imdbID }}/" target="_blank">IMDB</a>
+				</p>
+			</div>
+			<!-- /.col-xs-12 -->
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- ng-repeat -->
+</section>
+
+ <footer class="bg-primary">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<a class="pull-left" href="https://www.ricardtorres.com/" target="_blank">Ricard Torres</a>
+				<a class="pull-right" href="https://github.com/quicoto/movie-app" target="_blank"><i class="fa fa-github fa-2x"></i></a>
+				<a class="pull-right" href="https://twitter.com/ricard_dev" target="_blank"><i class="fa fa-twitter fa-2x"></i></a>
+			</div>
+			<!-- /.col-xs-12 -->
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.container -->
+</footer>
+
+<script src="dist/js/moviesapp-pack.min.js"></script>
+
+</body>
+</html>
+

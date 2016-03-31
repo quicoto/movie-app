@@ -29,4 +29,9 @@ function mainController($http, $scope) {
 }
 
 angular.module('moviesApp', [])
-    .controller('mainCtrl', ['$http', '$scope', mainController]);
+    .controller('mainCtrl', ['$http', '$scope', mainController])
+	.filter('removeHTTP', function() {
+	  return function(input) {
+	    return input.replace('http://', '');
+	  };
+	});

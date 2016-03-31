@@ -7,17 +7,16 @@ function mainController($http, $scope) {
         console.log('[Main Ctrl] Init...');
     }
 
-    var api = 'http://www.omdbapi.com/?type=movie&page=1&r=json';
+    var api = 'https://www.omdbapi.com/?type=movie&page=1&r=json';
 
 	$scope.getMovies = function() {
-
-		console.log('submit done!');
-
 	    $http({
 	        method: 'GET',
 	        url: api + '&s=' + $scope.searchTerm
 	    }).then(function successCallback(response) {
-	        console.log(response.data);
+			if (DEBUG) {
+	        	console.log(response.data);
+			}
 	        $scope.movies = response.data.Search;
 	    }, function errorCallback(response) {
 	        if (DEBUG) {

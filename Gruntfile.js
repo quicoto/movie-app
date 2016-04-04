@@ -117,6 +117,7 @@ module.exports = function(grunt) {
 					'source/js/vendor/jquery*.js',
 					'source/js/vendor/bootstrap*/*.js',
                     'source/js/vendor/angular.js',
+					'source/js/vendor/firebase.js',
 					'source/js/vendor/other*/*.js'
 				],
 				dest : 'dist/js/moviesapp-vendor.js',

@@ -1,38 +1,84 @@
 {% set pageTitle = "Home" -%} {% include "includes/_head.html" %} {%raw%}
 
-<section class="container search-results">
+<section class="container">
 
-	<ul>
-		<li ng-repeat="myMovie in myMovies | orderBy: 'Title'">
-			{{ myMovie.Title }}
-		</li>
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active"><a href="#searchResults" aria-controls="searchResults" role="tab" data-toggle="tab">Search</a></li>
+		<li role="presentation"><a href="#myMovies" aria-controls="myMovies" role="tab" data-toggle="tab">My Movies</a></li>
 	</ul>
 
-	<div ng-repeat="movie in movies track by $index" class="movie">
-		<div class="row">
-			<div class="col-xs-6 col-md-3">
-				<img ng-hide="movie.Poster === 'N/A'" class="img-responsive" ng-src="https://i0.wp.com/{{ movie.Poster | removeHTTP}}&strip=all" alt="{{ movie.Title }}">
-			</div>
-			<!-- /.col-xs-12 -->
-			<div class="col-xs-6 col-md-3">
-				<h4>{{ movie.Title }}</h4>
-				<p>
-					<strong>Year</strong> {{ movie.Year }}
-				</p>
-				<p>
-					<a href="http://www.imdb.com/title/{{ movie.imdbID }}/" target="_blank">IMDB</a>
-				</p>
-				<p>
-					<a class="btn btn-primary" ng-hide="movie.seen" ng-click="markSeen(movie)"><i class="fa fa-eye"></i> Add</a>
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane active" id="searchResults">
+			<div class="search-area">
+				<div class="row">
+					<form ng-submit="getMovies()">
+						<div class="col-sm-6 col-md-3">
+							<div class="form-group">
+								<label for="search" class="sr-only">Search</label>
+								<input ng-model="searchTerm" type="search" class="form-control" id="search" placeholder="Movie title..." required>
+							</div>
+						</div>
+						<!-- /.col-xs-12 -->
 
-					<a class="btn btn-danger" ng-show="movie.seen" ng-click="removeSeen(movie)"><i class="fa fa-eye-slash"></i> Remove</a>
-				</p>
+						<div class="col-sm-6 col-md-2">
+							<button type="submit" class="btn btn-primary btn-block">Search</button>
+						</div>
+						<!-- /.col-xs-12 -->
+					</form>
+				</div>
+				<!-- /.row -->
 			</div>
-			<!-- /.col-xs-12 -->
+
+			<div class="search-results">
+				<div ng-repeat="movie in movies track by $index" class="movie">
+					<div class="row">
+						<div class="col-xs-6 col-md-3">
+							<a ng-href="http://www.imdb.com/title/{{ movie.imdbID }}/" target="_blank"><img ng-hide="movie.Poster === 'N/A'" class="img-responsive" ng-src="https://i0.wp.com/{{ movie.Poster | removeHTTP}}&strip=all" alt="{{ movie.Title }}"></a>
+						</div>
+						<!-- /.col-xs-12 -->
+						<div class="col-xs-6 col-md-3">
+							<h4>{{ movie.Title }}</h4>
+							<p>
+								<strong>Year</strong> {{ movie.Year }}
+							</p>
+							<p>
+								<a class="btn btn-primary" ng-hide="movie.seen" ng-click="markSeen(movie)"><i class="fa fa-eye"></i> Add</a>
+
+								<a class="btn btn-danger" ng-show="movie.seen" ng-click="removeSeen(movie, movie.myIndex, 'true')"><i class="fa fa-eye-slash"></i> Remove</a>
+							</p>
+						</div>
+						<!-- /.col-xs-12 -->
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- ng-repeat -->
+			</div>
 		</div>
-		<!-- /.row -->
+		<div role="tabpanel" class="tab-pane" id="myMovies">
+			<div class="search-results">
+				<div ng-repeat="movie in myMovies track by $index" class="movie">
+					<div class="col-xs-6 col-md-3">
+						<a ng-href="http://www.imdb.com/title/{{ movie.imdbID }}/" target="_blank"><img ng-hide="movie.Poster === 'N/A'" class="img-responsive" ng-src="https://i0.wp.com/{{ movie.Poster | removeHTTP}}&strip=all" alt="{{ movie.Title }}"></a>
+						<h4>{{ movie.Title }}</h4>
+						<p>
+							<strong>Year</strong> {{ movie.Year }}
+						</p>
+						<p>
+							<a class="btn btn-danger" ng-click="removeSeen(movie, $index)"><i class="fa fa-eye-slash"></i> Remove</a>
+						</p>
+					</div>
+					<!-- /.col-xs-12 -->
+					<div class="clearfix visible-xs-block" ng-show="($index + 1) % 2 == 0"></div>
+				</div>
+				<!-- ng-repeat -->
+			</div>
+		</div>
 	</div>
-	<!-- ng-repeat -->
+
 </section>
+
+
 
 {%endraw%} {% include "includes/_bottom.html" %}

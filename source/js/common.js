@@ -22,14 +22,22 @@ function mainController($http, $scope, $firebaseArray) {
 	        	console.log(response.data);
 			}
 
-			// Check if I've seen the movie
-			var result = $.grep(response.data.Search, function(e, index){
-				if( e.imdbID === 'tt0257076' ){
-					response.data.Search[index].seen = true;
-				}
-			});
+			$scope.movies = response.data.Search;
 
-	        $scope.movies = response.data.Search;
+			var maxMovies = $scope.movies.length,
+				maxMyMovies = $scope.myMovies.length,
+				i,
+				j;
+
+			for (i = 0; i < maxMovies; i++){
+				for (j = 0; j < maxMyMovies; j++){
+					if( $scope.movies[i].imdbID === $scope.myMovies[j].imdbID ){
+						$scope.movies[i].seen = true;
+						$scope.movies[i].myIndex = j;
+					}
+				}
+			}
+
 
 	    }, function errorCallback(response) {
 	        if (DEBUG) {
@@ -45,14 +53,19 @@ function mainController($http, $scope, $firebaseArray) {
 			console.log(movie);
 		}
 		$scope.myMovies.$add(movie);
+		$scope.getMovies();
 	};
 
-	$scope.removeSeen = function(movie) {
+	$scope.removeSeen = function(movie, myIndex, refresh) {
 		if (DEBUG) {
 			console.info('Movie removed');
 			console.log(movie);
 		}
-		$scope.myMovies.$remove(movie);
+
+		$scope.myMovies.$remove(myIndex);
+		if( refresh === 'true' ){
+			$scope.getMovies();
+		}
 	};
 }
 

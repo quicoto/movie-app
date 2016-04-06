@@ -57,8 +57,16 @@
 			</div>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="myMovies">
-			<div class="search-results">
-				<div ng-repeat="movie in myMovies | orderBy: 'Title' track by $index " class="movie">
+			<div ng-show="!customSort">
+				<h1>Last Seen Movies</h1>
+				<a class="btn btn-primary" ng-click="orderResults('Title')">Sort by Name</a>
+			</div>
+			<div ng-show="customSort">
+				<h1>All movies</h1>
+				<a class="btn btn-primary" ng-click="orderResults('')">Sort by Last Seen</a>
+			</div>
+			<div class="search-results row">
+				<div ng-repeat="movie in myMovies | orderBy: customSort track by $index " class="movie">
 					<div class="col-xs-6 col-md-3">
 						<a ng-href="http://www.imdb.com/title/{{ movie.imdbID }}/" target="_blank"><img ng-hide="movie.Poster === 'N/A'" class="img-responsive" ng-src="https://i0.wp.com/{{ movie.Poster | removeHTTP}}&strip=all" alt="{{ movie.Title }}"></a>
 						<h4>{{ movie.Title }}</h4>

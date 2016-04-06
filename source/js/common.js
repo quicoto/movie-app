@@ -13,6 +13,11 @@ function mainController($http, $scope, $firebaseArray) {
 
 	$scope.myMovies = $firebaseArray(ref);
 
+	if (DEBUG) {
+		console.log($scope.myMovies);
+	}
+
+
 	$scope.getMovies = function() {
 	    $http({
 	        method: 'GET',
@@ -67,6 +72,11 @@ function mainController($http, $scope, $firebaseArray) {
 			$scope.getMovies();
 		}
 	};
+
+	$scope.customSort = '';
+	$scope.orderResults = function(sort) {
+		$scope.customSort = sort;
+	}
 }
 
 angular.module('moviesApp', ["firebase"])

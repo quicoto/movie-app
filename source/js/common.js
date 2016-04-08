@@ -10,8 +10,13 @@ function mainController($http, $scope, $firebaseArray) {
     }
 
 	var ref = new Firebase('https://qmoviesapp.firebaseio.com/');
-	$scope.resultsPerPage = 2;
-	$scope.limit = $scope.resultsPerPage;
+	$scope.limit = 4; // Initial value
+	var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+
+	// If we're in Desktop
+	if (width > 900) {
+		$scope.limit = 9999;
+	}
 
 	function getMyMovies() {
 		$scope.myMovies = $firebaseArray(ref.orderByChild("added").limitToLast($scope.limit));
@@ -20,8 +25,8 @@ function mainController($http, $scope, $firebaseArray) {
 	// Initial
 	getMyMovies();
 
-	$scope.loadMore = function() {
-		$scope.limit += $scope.resultsPerPage;
+	$scope.loadMore = function(howManyMore) {
+		$scope.limit += parseInt(howManyMore);
 		getMyMovies();
 	}
 

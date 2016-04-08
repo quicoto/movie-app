@@ -132,15 +132,20 @@
 				<!-- ng-repeat -->
 				<div class="clearfix"></div>
 				<div class="col-xs-12">
-					<a class="btn btn-primary btn-block" ng-click="loadMore()">Load more {{ limit }}</a>
-				</div>				
+					<p>
+						<a class="btn btn-primary btn-block" ng-click="loadMore(4)">Load More</a>
+					</p>
+				</div>
+				<div class="col-xs-12">
+					<p>
+						<a class="btn btn-warning btn-block" ng-click="loadMore(99999)"><i class="fa fa-bolt"></i> Load All <i class="fa fa-bolt"></i></a>
+					</p>
+				</div>
 			</div>
 		</div>
 	</div>
 
 </section>
-
-
 
  <footer class="bg-primary">
 	<div class="container">

@@ -57,6 +57,7 @@ function mainController($http, $scope, $firebaseArray) {
 			console.info('Movie added');
 			console.log(movie);
 		}
+		movie.added = new Date().getTime();
 		$scope.myMovies.$add(movie);
 		$scope.getMovies();
 	};
@@ -73,7 +74,7 @@ function mainController($http, $scope, $firebaseArray) {
 		}
 	};
 
-	$scope.customSort = '';
+	$scope.customSort = '-added'; // The "-" means DESC
 	$scope.orderResults = function(sort) {
 		$scope.customSort = sort;
 	}

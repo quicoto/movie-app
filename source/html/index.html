@@ -57,13 +57,13 @@
 			</div>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="myMovies">
-			<div ng-show="!customSort">
+			<div ng-show="customSort == '-added'">
 				<h1>Last Seen Movies</h1>
 				<a class="btn btn-primary" ng-click="orderResults('Title')">Sort by Name</a>
 			</div>
-			<div ng-show="customSort">
+			<div ng-show="customSort == 'Title'">
 				<h1>All movies</h1>
-				<a class="btn btn-primary" ng-click="orderResults('')">Sort by Last Seen</a>
+				<a class="btn btn-primary" ng-click="orderResults('-added')">Sort by Last Seen</a>
 			</div>
 			<div class="search-results row">
 				<div ng-repeat="movie in myMovies | orderBy: customSort track by $index " class="movie">

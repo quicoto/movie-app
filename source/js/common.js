@@ -10,13 +10,24 @@ function mainController($http, $scope, $firebaseArray) {
     }
 
 	var ref = new Firebase('https://qmoviesapp.firebaseio.com/');
+	$scope.resultsPerPage = 2;
+	$scope.limit = $scope.resultsPerPage;
 
-	$scope.myMovies = $firebaseArray(ref);
+	function getMyMovies() {
+		$scope.myMovies = $firebaseArray(ref.orderByChild("added").limitToLast($scope.limit));
+	}
+
+	// Initial
+	getMyMovies();
+
+	$scope.loadMore = function() {
+		$scope.limit += $scope.resultsPerPage;
+		getMyMovies();
+	}
 
 	if (DEBUG) {
 		console.log($scope.myMovies);
 	}
-
 
 	$scope.getMovies = function() {
 	    $http({

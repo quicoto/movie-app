@@ -66,7 +66,7 @@
 				<a class="btn btn-primary" ng-click="orderResults('-added')">Sort by Last Seen</a>
 			</div>
 			<div class="search-results row">
-				<div ng-repeat="movie in myMovies | orderBy: customSort track by $index " class="movie">
+				<div ng-repeat="movie in myMovies | limitTo:limit | orderBy: customSort track by $index " class="movie">
 					<div class="col-xs-6 col-md-3">
 						<a ng-href="http://www.imdb.com/title/{{ movie.imdbID }}/" target="_blank"><img ng-hide="movie.Poster === 'N/A'" class="img-responsive" ng-src="https://i0.wp.com/{{ movie.Poster | removeHTTP}}&strip=all" alt="{{ movie.Title }}"></a>
 						<h4>{{ movie.Title }}</h4>
@@ -82,6 +82,10 @@
 					<div class="clearfix visible-md-block visible-lg-block" ng-show="($index + 1) % 4 == 0"></div>
 				</div>
 				<!-- ng-repeat -->
+				<div class="clearfix"></div>
+				<div class="col-xs-12">
+					<a class="btn btn-primary btn-block" ng-click="loadMore()">Load more {{ limit }}</a>
+				</div>				
 			</div>
 		</div>
 	</div>
